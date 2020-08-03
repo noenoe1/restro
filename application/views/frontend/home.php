@@ -347,7 +347,7 @@
                     $categories = $this->Category->get_all(5)->result();
                     foreach ($categories as $cat) {
                 ?>
-                <li data-filter=".break" value="<?php echo $cat->id; ?>"><a href=""><?php echo $cat->name; ?></a></li>
+                <li data-filter=".break" value="<?php echo $cat->id; ?>"><a href=""  id="<?php echo $cat->id; ?>" ><?php echo $cat->name; ?></a></li>
                 <input type="hidden" name="catId" id="catId" value="<?php echo $cat->id; ?>">
                 <?php } ?>
             </ul>
@@ -372,7 +372,9 @@
                                 <?php 
                                   $length = 120; 
                                   $text = preg_replace("/^(.{1,$length})(\s.*|$)/s", '\\1...', $prd->description);
-                                  echo $text; 
+                                  
+                                  //echo $text; 
+                                  echo "Aliquam gravida faucibus fermentum. Integer aliquet";
                                 ?>
                         
                             </p>
@@ -490,24 +492,40 @@
 <script>
     $('.popular_filter li').on('click', function() {
 
-        var catId = $('#catId').val();
-        // alert(catId);
+        // var catId = $('#catId').val();
+
+        var catId = $(this).attr('value');
+
         $.ajax({
           url: '<?php echo site_url() . '/get_all_products/';?>' + catId,
           method: 'GET',
           dataType: 'JSON',
           success:function(data){
             $('#sub_cat_id').html("");
+            $('#filtercatid').empty();
             $.each(data, function(i, obj){
                 // $('#products').append('<option value="'+ obj.id +'">' + obj.name+ '</option>');
+                
                 var newTextBoxDiv = $(document.createElement('div'))
                 .attr("class", 'col-md-6');
 
+
                 newTextBoxDiv.after().html(
-                '<div class="media"><div class="media-left"><img src="'+obj.img+'" alt="" style="width:150px;height: 160px;"></div><div class="media-body"><a href="#"><h3>'+obj.name+'</h3></a><h4>$'+obj.original_price+'</h4><p>'+obj.description+' </p><a class="read_mor_btn" href="#">Add To Cart</a><ul><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star-half-o"></i></a></li></ul></div></div>');
+                '<div class="media"><div class="media-left"><img src="'+obj.img+'" alt="" style="width:150px;height: 160px;"></div><div class="media-body"><a href="#"><h3>'+obj.name+'</h3></a><h4>$'+obj.original_price+'</h4><p>'+ "Lorem ipsum dolor sit amets, consectetur adipiscing" +' </p><a class="read_mor_btn" href="#">Add To Cart</a><ul><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star-half-o"></i></a></li></ul></div></div>');
+
+
 
                 newTextBoxDiv.appendTo("#filtercatid");
+
+
             });
+
+            var data_count = Object.keys(data).length;
+
+            alert(data_count);
+
+            document.getElementById('filtercatid').style.height = data_count * 120 + "px";
+
             // $('#name').val($('#name').val() + " ").blur();
             $('#products').trigger('change');
           }
