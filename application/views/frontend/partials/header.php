@@ -56,7 +56,11 @@
                                 <li><a href="blog-details.html">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li><a href="index.html">Login</a></li>
+                        <?php if ( !isset( $user_info )): ?>
+                        <li><a href="<?php echo site_url().'/userlogin'; ?>">Login</a></li>
+                        <?php else: ?>
+                        <li><a href="<?php echo site_url().'/userlogout'; ?>">Logout</a></li>
+                        <?php endif; ?>
                         <li><a href="contact.html">Contact US</a></li>
                         <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
                     </ul>
