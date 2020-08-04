@@ -522,8 +522,6 @@
 
             var data_count = Object.keys(data).length;
 
-            alert(data_count);
-
             document.getElementById('filtercatid').style.height = data_count * 120 + "px";
 
             // $('#name').val($('#name').val() + " ").blur();

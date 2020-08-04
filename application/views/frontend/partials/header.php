@@ -61,7 +61,7 @@
                         <?php else: ?>
                         <li><a href="<?php echo site_url().'/userlogout'; ?>">Logout</a></li>
                         <?php endif; ?>
-                        <li><a href="contact.html">Contact US</a></li>
+                        <li><a href="<?php echo site_url('contactus'); ?>">Contact US</a></li>
                         <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

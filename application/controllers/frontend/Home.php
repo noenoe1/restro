@@ -242,4 +242,78 @@ class Home extends FE_Controller
 		$this->redirect_url();
 	}
 
+	/**
+	 * Contact Us from the system
+	 */
+	function contactus() {
+		if ( $this->is_POST() ) {
+			//name
+		   	if ( $this->has_data( 'name' )) {
+				$data['name'] = $this->get_data( 'name' );
+
+			}
+
+		   	// email
+		   	if ( $this->has_data( 'email' )) {
+				$data['email'] = $this->get_data( 'email' );
+			}
+
+			// phone
+		   	if ( $this->has_data( 'phone' )) {
+				$data['phone'] = $this->get_data( 'phone' );
+			}
+
+			// message
+		   	if ( $this->has_data( 'message' )) {
+				$data['message'] = $this->get_data( 'message' );
+			}
+
+			// set timezone
+
+			if($contact_id == "") {
+				//save
+				$data['added_date'] = date("Y-m-d H:i:s");
+
+			}
+			// print_r($data);die;
+			//save item
+			if ( ! $this->Contact->save( $data, $id )) {
+			// if there is an error in inserting user data,	
+
+				// rollback the transaction
+				$this->db->trans_rollback();
+
+				// set error message
+				$this->data['error'] = get_msg( 'err_model' );
+				
+				return;
+			}
+
+			
+			/** 
+			 * Check Transactions 
+			 */
+
+			// commit the transaction
+			if ( ! $this->check_trans()) {
+	        	
+				// set flash error message
+				$this->set_flash_msg( 'error', get_msg( 'err_model' ));
+			} else {
+
+				if ( $contact_id ) {
+				// if user id is not false, show success_add message
+					
+					$this->set_flash_msg( 'success', get_msg( 'success_contact_edit' ));
+				} else {
+				// if user id is false, show success_edit message
+
+					$this->set_flash_msg( 'success', get_msg( 'success_contact_add' ));
+				}
+			}
+
+		}
+		$this->load_template( 'contact' );
+	}
+
 }
