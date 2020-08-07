@@ -106,7 +106,9 @@ class Home extends FE_Controller
     	$products = $this->Product->get_all_by($conds)->result();
     	if ( !empty( $products )) foreach( $products as $prd ) {
 
-
+    		$length = 120; 
+            $description = preg_replace("/^(.{1,$length})(\s.*|$)/s", '\\1...', $prd->description);
+            $prd->readmore = $description;
 			$conds = array( 'img_type' => 'product', 'img_parent_id' => $prd->id );
 			
 			$images = $this->Image->get_all_by( $conds )->result();
@@ -314,6 +316,74 @@ class Home extends FE_Controller
 
 		}
 		$this->load_template( 'contact' );
+	}
+
+	/**
+	 *  Restaurant Page
+	 */
+	function restaurant($id)
+	{
+		$this->data['shop_id'] = $id;
+		$this->load_template( 'restaurant' );
+	}
+
+	/**
+	 * Search Result Page
+	 */
+	function search()
+	{
+		// condition with search term
+		if($this->input->post('submit') != NULL ){
+			if ($this->get_data('cat_id') != '' || $this->get_data('cat_id') != '0') {
+				$conds['cat_id'] = $this->get_data('cat_id');
+				$this->session->set_userdata(array("cat_id" => $this->input->post('cat_id')));
+				$this->data['cat_id'] = $this->session->userdata('cat_id');
+				$this->data['selected_cat_id'] = $this->input->post('cat_id');
+			}
+
+			if ($this->get_data('sub_cat_id') != '' || $this->get_data('sub_cat_id') != '0') {
+				$conds['sub_cat_id'] = $this->get_data('sub_cat_id');
+				$this->session->set_userdata(array("sub_cat_id" => $this->input->post('sub_cat_id')));
+				$this->data['sub_cat_id'] = $this->session->userdata('sub_cat_id');
+			}
+		} else {
+			if($this->session->userdata('cat_id') != NULL){
+				$conds['cat_id'] = $this->session->userdata('cat_id');
+				$this->data['cat_id'] = $this->session->userdata('cat_id');
+				$this->data['selected_cat_id'] = $this->session->userdata('cat_id');
+			}
+
+			if($this->session->userdata('sub_cat_id') != NULL){
+				$conds['sub_cat_id'] = $this->session->userdata('sub_cat_id');
+				$this->data['sub_cat_id'] = $this->session->userdata('sub_cat_id');
+			}
+		}
+		$conds['status'] = 1;
+		$this->data['products'] = $this->Product->get_all_by( $conds, $limit, $offset );
+		$this->load_template( 'restaurant' );
+	}
+
+	function get_all_sub_categories( $cat_id )
+	{
+		$conds['cat_id'] = $cat_id;
+		$sub_categories = $this->Subcategory->get_all_by($conds);
+		echo json_encode($sub_categories->result());
+	}
+
+	/**
+	 * Blog Page
+	 */
+	function blog($page=1)
+	{
+		$total = $this->Feed->count_all_by( array( 'no_publish_filter' => 1 ) );
+	 	$pag = $this->config->item( 'blog_display_limit' );
+	 	$noofpage = ceil($total/$pag);
+	 	$conds['status'] = 1;
+	 	$offset = (($page-1)*$pag);
+	 	$limit = $pag;
+		$blogs = $this->Feed->get_all_by( array( 'no_publish_filter' => 1 ), $limit, $offset );
+		$this->data['blogs'] = $blogs;
+		$this->load_template('blog');
 	}
 
 }

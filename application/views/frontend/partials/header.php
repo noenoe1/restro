@@ -51,7 +51,7 @@
                         <li class="dropdown submenu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="blog.html">Blog</a></li>
+                                <li><a href="<?php echo site_url('blog'); ?>">Blog</a></li>
                                 <li><a href="blog-gallery.html">Blog Gallery</a></li>
                                 <li><a href="blog-details.html">Blog Details</a></li>
                             </ul>
