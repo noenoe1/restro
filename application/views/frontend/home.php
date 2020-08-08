@@ -380,13 +380,38 @@
                                 </a>
                             </p>
                             <a class="read_mor_btn" href="#">Add To Cart</a>
+                            <?php
+                            //Rating Calculation Here 
+                            
+                            $conds['to_user_id'] = $itm->added_user_id;
+                            
+                            //$ratings = $this->get_room_ratings( $room_id );
+                            $ratings = $this->Rate->get_all_by( $conds )->result();
+
+                            $rating_count_value = count($ratings); 
+                            $rating_total_value = 0;
+                            foreach ( $ratings as $rat ) {
+                            // loop each rating and get total
+                              $rating_total_value += $rat->rating;
+                            }
+                            $final_rating =  $rating_total_value/$rating_count_value;
+
+                            ?>
+
                             <ul>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star-half-o"></i></a></li>
+                              <?php
+
+                              for($i=1; $i<=5;$i++) {
+                                if($i < $final_rating) {
+                                  echo "<i class='fa fa-star checked'></i>";
+                                } else {
+                                  echo "<i class='fa fa-star'></i>";
+                                }
+
+                              }
+                            ?>
                             </ul>
+                            
                         </div>
                     </div>
                 </div>

@@ -49,7 +49,7 @@
                                     ?>
                                 </p>
                                 <div class="pull-left">
-                                    <a class="event_btn" href="#">READ MORE</a>
+                                    <a class="event_btn" href="<?php echo site_url('blogdetail/').$blog->id; ?>">READ MORE</a>
                                 </div>
                                 <div class="pull-right">
                                     <a href="#"><i class="fa fa-eye"></i>206</a>

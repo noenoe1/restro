@@ -386,4 +386,14 @@ class Home extends FE_Controller
 		$this->load_template('blog');
 	}
 
+	/**
+	 * Blog Detail Page
+	 */
+	function blogdetail($id)
+	{
+		// load blog
+		$this->data['blog'] = $this->Feed->get_one( $id );
+		$this->load_template('blogdetail');
+	}
+
 }
