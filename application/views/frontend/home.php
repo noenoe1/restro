@@ -230,10 +230,11 @@
     </div>
 </section>
 <!--================End Slider Area =================-->
-        
+       
 <!--================Booking Table Area =================-->
 <section class="booking_table_area">
     <div class="container">
+        <?php flash_msg(); ?>
         <div class="s_white_title">
             <h3>Book a</h3>
             <h2>Table</h2>
@@ -246,19 +247,19 @@
         <div class="row">
             <div class="col-sm-2">
                 <div class="input-append date form_datetime">
-                    <input size="16" type="text" value="" readonly placeholder="Date" name="date" id="date">
+                    <input size="16" type="text" value="" readonly placeholder="Date" name="resv_date" id="resv_date">
                     <span class="add-on"><i class="icon-th"></i></span>
                 </div>
             </div>
             <div class="col-sm-2">
                 <div class="input-append date form_time">
-                    <input size="16" type="text" value="" readonly placeholder="Dining Time" name="dinner_time" id="dinner_time">
+                    <input size="16" type="text" value="" readonly placeholder="Dining Time" name="resv_time" id="resv_time">
                     <span class="add-on"><i class="icon-th"></i></span>
                 </div>
             </div>
             <div class="col-sm-3">
                 <div class="party_size">
-                    <select class="selectpicker">
+                    <select class="selectpicker" id="party_size" name="party_size">
                         <option value="0">Select Party Size</option>
                         <?php
                             $array = array('1' => 1, '2' => 2,'3' => 3, '4' => 4,'5' => 5, '6' => 6,'7' => 7, '8' => 8,'9' => 9, '10' => 10,'11' => 11, '12' => 12,'13' => 13, '14' => 14,'15' => 15, '16' => 16,'17' => 17, '18' => 18,'19' => 19, '20' => 20);
@@ -276,7 +277,7 @@
             </div>
             <div class="col-sm-3">
                 <div class="party_size">
-                    <select class="selectpicker">
+                    <select class="selectpicker" id="shop_id" name="shop_id">
                         <option value="0">Restaurants</option>
                         <?php
                           $restaurants = $this->Shop->get_all( )->result();
@@ -340,33 +341,43 @@
             <h2>Today's Menu</h2>
         </div>
         <div class="popular_filter">
-            <ul>
+            <ul id="cat_id">
                 <li class="active" data-filter="*"><a href="">All</a></li>
                 <?php
                     $categories = $this->Category->get_all(5)->result();
                     foreach ($categories as $cat) {
                 ?>
-                <li data-filter=".break"><a href=""><?php echo $cat->name; ?></a></li>
+                <li data-filter=".break" value="<?php echo $cat->id; ?>"><a href=""  id="<?php echo $cat->id; ?>" ><?php echo $cat->name; ?></a></li>
+                <input type="hidden" name="catId" id="catId" value="<?php echo $cat->id; ?>">
                 <?php } ?>
             </ul>
         </div>
         <div class="p_recype_item_main">
-            <div class="row p_recype_item_active">
+            <div class="row p_recype_item_active" id="filtercatid">
                 <?php
                     $products = $this->Product->get_all(10)->result();
                     foreach ($products as $prd) {
                     $conds = array( 'img_type' => 'product', 'img_parent_id' => $prd->id );
                     $images = $this->Image->get_all_by( $conds )->result();
                 ?>
-                <div class="col-md-6 break snacks">
+                <div class="col-md-6" id="products">
                     <div class="media">
                         <div class="media-left">
-                            <img src="<?php echo $this->ps_image->upload_url . $images[0]->img_path; ?>" alt="" style="width:150px;height: 150px;">
+                            <img src="<?php echo $this->ps_image->upload_url . $images[0]->img_path; ?>" alt="" style="width:150px;height: 160px;">
                         </div>
                         <div class="media-body">
                             <a href="#"><h3><?php echo $prd->name; ?></h3></a>
                             <h4>$<?php echo $prd->original_price; ?></h4>
-                            <p><?php echo $prd->description; ?></p>
+                            <p>
+                                <?php 
+                                  $length = 120; 
+                                  $text = preg_replace("/^(.{1,$length})(\s.*|$)/s", '\\1...', $prd->description);
+                                  
+                                  //echo $text; 
+                                  echo "Aliquam gravida faucibus fermentum. Integer aliquet";
+                                ?>
+                        
+                            </p>
                             <a class="read_mor_btn" href="#">Add To Cart</a>
                             <ul>
                                 <li><a href="#"><i class="fa fa-star"></i></a></li>
@@ -405,14 +416,12 @@
                         <img src="<?php echo $this->ps_image->upload_url . $images[0]->img_path; ?>" alt="" style="width: 100%;height: 200px;">
                         <div class="chef_hover">
                             <a href="#"><h4><?php echo $rest->name; ?></h4></a>
-                            <h5>Chef</h5>
-                            <p><?php echo $rest->description; ?></p>
                         </div>
                     </div>
                     <div class="chef_name">
                         <div class="name_chef_text">
                             <h3><?php echo $rest->name; ?></h3>
-                            <h4>Chef</h4>
+                            <h4></h4>
                         </div>
                         <ul>
                             <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -428,39 +437,98 @@
 </section>
 <!--================End Our Chefs Area =================-->
         
-        <!--================Recent Blog Area =================-->
-        <section class="recent_bloger_area">
-            <div class="container">
-                <div class="s_black_title">
-                    <h3>News</h3>
-                    <h2>Recent Blog</h2>
-                </div>
-                <div class="row">
-                <?php
-                    $feeds = $this->Feed->get_all(3)->result();
-                    foreach($feeds as $feed) {
-                        $conds = array( 'img_type' => 'feed', 'img_parent_id' => $feed->id );
-                        $images = $this->Image->get_all_by( $conds )->result();
-                ?>
+<!--================Recent Blog Area =================-->
+<section class="recent_bloger_area">
+    <div class="container">
+        <div class="s_black_title">
+            <h3>News</h3>
+            <h2>Recent Blog</h2>
+        </div>
+        <div class="row">
+        <?php
+            $feeds = $this->Feed->get_all(3)->result();
+            foreach($feeds as $feed) {
+                $conds = array( 'img_type' => 'feed', 'img_parent_id' => $feed->id );
+                $images = $this->Image->get_all_by( $conds )->result();
+        ?>
 
-                    <div class="col-md-4">
-                        <div class="recent_blog_item">
-                            <div class="blog_img">
-                                <img src="<?php echo $this->ps_image->upload_url . $images[0]->img_path; ?>" alt="" style="width: 100%; height: 250px;">
-                            </div>
-                            <div class="recent_blog_text">
-                                <div class="recent_blog_text_inner">
-                                    <h6><a href="#">Articles</a></h6>
-                                    <a href="blog-details.html"><h5>Restaurant Industry & News</h5></a>
-                                    <p>Lorem Ipsum is simpily dummy texts printing and typesetting industry.</p>
-                                    <a href="#">Feb 11,ac 2017 <span>/</span></a>
-                                    <a href="#">No Comments</a>
-                                </div>
-                            </div>
+            <div class="col-md-4">
+                <div class="recent_blog_item">
+                    <div class="blog_img">
+                        <img src="<?php echo $this->ps_image->upload_url . $images[0]->img_path; ?>" alt="" style="width: 100%; height: 250px;">
+                    </div>
+                    <div class="recent_blog_text">
+                        <div class="recent_blog_text_inner">
+                            <h6><a href="#">Blogs</a></h6>
+                            <a href="blog-details.html"><h5><?php echo $feed->name; ?></h5></a>
+                            <p>
+                                <?php 
+                                  $length = 120; 
+                                  $text = preg_replace("/^(.{1,$length})(\s.*|$)/s", '\\1...', $feed->description);
+                                  echo $text; 
+                                ?>
+                            </p>
+                            <a href="#">
+                                <?php 
+                                    $added_date = $feed->added_date;
+                                    $dt = strtotime($added_date);
+                                    $day = date("d", $dt);
+                                    $month = date("M",$dt);
+                                    $year = date("Y",$dt);
+                                    echo $month . " " . $day . "," . $year;
+                                ?>
+                            </a>
                         </div>
                     </div>
-                <?php } ?>
                 </div>
             </div>
-        </section>
-        <!--================End Recent Blog Area =================-->
+        <?php } ?>
+        </div>
+    </div>
+</section>
+<!--================End Recent Blog Area =================-->
+
+<script src="<?php echo base_url( 'assets/jquery/jquery.min.js' ); ?>"></script>
+<script>
+    $('.popular_filter li').on('click', function() {
+
+        // var catId = $('#catId').val();
+
+        var catId = $(this).attr('value');
+
+        $.ajax({
+          url: '<?php echo site_url() . '/get_all_products/';?>' + catId,
+          method: 'GET',
+          dataType: 'JSON',
+          success:function(data){
+            $('#sub_cat_id').html("");
+            $('#filtercatid').empty();
+            $.each(data, function(i, obj){
+                // $('#products').append('<option value="'+ obj.id +'">' + obj.name+ '</option>');
+                
+                var newTextBoxDiv = $(document.createElement('div'))
+                .attr("class", 'col-md-6');
+
+
+                newTextBoxDiv.after().html(
+                '<div class="media"><div class="media-left"><img src="'+obj.img+'" alt="" style="width:150px;height: 160px;"></div><div class="media-body"><a href="#"><h3>'+obj.name+'</h3></a><h4>$'+obj.original_price+'</h4><p>'+ "Lorem ipsum dolor sit amets, consectetur adipiscing" +' </p><a class="read_mor_btn" href="#">Add To Cart</a><ul><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star"></i></a></li><li><a href="#"><i class="fa fa-star-half-o"></i></a></li></ul></div></div>');
+
+
+
+                newTextBoxDiv.appendTo("#filtercatid");
+
+
+            });
+
+            var data_count = Object.keys(data).length;
+
+            alert(data_count);
+
+            document.getElementById('filtercatid').style.height = data_count * 120 + "px";
+
+            // $('#name').val($('#name').val() + " ").blur();
+            $('#products').trigger('change');
+          }
+        });
+    });
+</script>

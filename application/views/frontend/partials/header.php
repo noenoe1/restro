@@ -41,13 +41,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#"><img src="<?php echo base_url('uploads/img/logo-1.png'); ?>" alt=""></a>
+                    <a class="navbar-brand" href="<?php echo site_url('home'); ?>"><img src="<?php echo base_url('uploads/img/logo-1.png'); ?>" alt=""></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="index.html">Home</a></li>
+                        <li class="active"><a href="<?php echo site_url('home'); ?>">Home</a></li>
                         <li class="dropdown submenu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                             <ul class="dropdown-menu">
@@ -56,7 +56,11 @@
                                 <li><a href="blog-details.html">Blog Details</a></li>
                             </ul>
                         </li>
-                        <li><a href="index.html">Login</a></li>
+                        <?php if ( !isset( $user_info )): ?>
+                        <li><a href="<?php echo site_url().'/userlogin'; ?>">Login</a></li>
+                        <?php else: ?>
+                        <li><a href="<?php echo site_url().'/userlogout'; ?>">Logout</a></li>
+                        <?php endif; ?>
                         <li><a href="contact.html">Contact US</a></li>
                         <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
                     </ul>
