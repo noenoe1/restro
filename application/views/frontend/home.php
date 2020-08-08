@@ -522,10 +522,10 @@
 
         var catId = $(this).attr('value');
         
-        // if(catId == "")
-        // {
-        //     catId = "000";
-        // }
+        if(catId == "")
+        {
+            catId = "000";
+        }
 
 
         $.ajax({

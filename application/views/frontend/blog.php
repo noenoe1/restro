@@ -4,8 +4,8 @@
         <div class="banner_content">
             <h4>Blog List</h4>
             <a href="#">Home</a>
-            <a href="blog.html">Blog</a>
-            <a class="active" href="blog.html">List</a>
+            <a href="<?php echo site_url('blog'); ?>">Blog</a>
+            <a class="active" href="#">List</a>
         </div>
     </div>
 </section>
@@ -15,7 +15,7 @@
 <section class="blog_list_area">
     <div class="container">
         <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="row">
                     <?php
                         foreach($blogs->result() as $blog) {
@@ -25,7 +25,9 @@
                     <article class="blog_list_item row m0">
                         <div class="col-md-6">
                             <div class="blog_list_img">
-                                <img src="<?php echo $this->ps_image->upload_url . $images[0]->img_path; ?>" alt="">
+                                <a href="<?php echo site_url('blogdetail/').$blog->id; ?>">
+                                    <img src="<?php echo $this->ps_image->upload_url . $images[0]->img_path; ?>" alt="">
+                                </a>
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -37,12 +39,16 @@
                                     $month = date("M",$dt);
                                     $year = date("Y",$dt);
                                 ?>
-                                <h3><?php echo $blog->name; ?></h3>
+                                <h3>
+                                    <a href="<?php echo site_url('blogdetail/').$blog->id; ?>">
+                                        <?php echo $blog->name; ?>
+                                    </a>
+                                </h3>
                                 <h6>Posted by <a href="#"><?php echo $this->User->get_one($blog->added_user_id)->user_name; ?></a>  at 
                                     <?php echo $day." ".$month.", ".$year; ?></h6>
                                 <p>
                                     <?php
-                                        $length = 120; 
+                                        $length = 250; 
                                         $text = preg_replace("/^(.{1,$length})(\s.*|$)/s", '\\1...', $blog->description);
                                           
                                         echo $text;
@@ -51,11 +57,7 @@
                                 <div class="pull-left">
                                     <a class="event_btn" href="<?php echo site_url('blogdetail/').$blog->id; ?>">READ MORE</a>
                                 </div>
-                                <div class="pull-right">
-                                    <a href="#"><i class="fa fa-eye"></i>206</a>
-                                    <a href="#"><i class="fa fa-comment-o"></i>19</a>
-                                    <a href="#"><i class="fa fa-heart-o"></i>206</a>
-                                </div>
+                                
                             </div>
                         </div>
                     </article>
