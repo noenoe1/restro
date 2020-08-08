@@ -51,9 +51,7 @@
                         <li class="dropdown submenu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">News <i class="fa fa-angle-down" aria-hidden="true"></i></a>
                             <ul class="dropdown-menu">
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="blog-gallery.html">Blog Gallery</a></li>
-                                <li><a href="blog-details.html">Blog Details</a></li>
+                                <li><a href="<?php echo site_url('blog'); ?>">Blog</a></li>
                             </ul>
                         </li>
                         <?php if ( !isset( $user_info )): ?>
@@ -61,7 +59,7 @@
                         <?php else: ?>
                         <li><a href="<?php echo site_url().'/userlogout'; ?>">Logout</a></li>
                         <?php endif; ?>
-                        <li><a href="contact.html">Contact US</a></li>
+                        <li><a href="<?php echo site_url('contactus'); ?>">Contact US</a></li>
                         <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

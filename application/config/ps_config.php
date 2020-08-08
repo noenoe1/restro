@@ -31,6 +31,7 @@ $config['comments_display_limit'] = 3;
 $config['news_display_limit'] = 6;
 $config['fav_display_limit'] = 3;
 $config['like_display_limit'] = 3;
+$config['blog_display_limit'] = 5;
 
 /** FrontEnd Template Path */
 $config['fe_view_path'] = 'frontend';
