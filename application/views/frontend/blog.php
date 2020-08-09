@@ -51,11 +51,7 @@
                                 <div class="pull-left">
                                     <a class="event_btn" href="<?php echo site_url('blogdetail/').$blog->id; ?>">READ MORE</a>
                                 </div>
-                                <div class="pull-right">
-                                    <a href="#"><i class="fa fa-eye"></i>206</a>
-                                    <a href="#"><i class="fa fa-comment-o"></i>19</a>
-                                    <a href="#"><i class="fa fa-heart-o"></i>206</a>
-                                </div>
+                               
                             </div>
                         </div>
                     </article>

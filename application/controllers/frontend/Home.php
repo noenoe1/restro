@@ -396,4 +396,14 @@ class Home extends FE_Controller
 		$this->load_template('blogdetail');
 	}
 
+	/**
+	 * Food Detail Page
+	 */
+	function food_detail($id)
+	{
+		// load blog
+		$this->data['product'] = $this->Product->get_one( $id );
+		$this->load_template('food_detail');
+	}
+
 }
