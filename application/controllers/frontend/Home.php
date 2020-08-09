@@ -102,8 +102,18 @@ class Home extends FE_Controller
 
 	function get_all_products( $cat_id )
     {
-    	$conds['cat_id'] = $cat_id;
-    	$products = $this->Product->get_all_by($conds)->result();
+    	
+
+    	if($cat_id == "000") {
+    		$conds['cat_id'] = "";
+    		$products = $this->Product->get_all_by($conds, 10)->result();
+    	} else {
+    		$conds['cat_id'] = $cat_id;
+    		$products = $this->Product->get_all_by($conds)->result();
+    	}
+
+    	
+    	
     	if ( !empty( $products )) foreach( $products as $prd ) {
 
     		$length = 120; 

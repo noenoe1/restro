@@ -1,2 +1,6 @@
 application/config/database.php
+<<<<<<< HEAD
 .DS_Store
+=======
+.DS_Store
+>>>>>>> 893bd01fce2a0bab462469e91a5c6da36db99b21

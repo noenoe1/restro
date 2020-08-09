@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" href="img/express-favicon.png" type="image/x-icon" />
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-        <title>RedCaynne Re</title>
+        <title>Restro</title>
 
         <!-- Icon css link -->
         <link href="<?php echo base_url('assets/frontend/vendors/material-icon/css/materialdesignicons.min.css'); ?>" rel="stylesheet">

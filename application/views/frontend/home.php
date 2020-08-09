@@ -68,7 +68,7 @@
                             data-splitin="none" 
                             data-splitout="none" 
                             data-responsive_offset="on" 
-                            data-elementdelay="0.05" >Red Cayenne
+                            data-elementdelay="0.05" >Restro
                         </div>
                         <div class="tp-caption third_text" 
                             data-x="center" 
@@ -179,7 +179,7 @@
                             data-splitin="none" 
                             data-splitout="none" 
                             data-responsive_offset="on" 
-                            data-elementdelay="0.05" >Red Cayenne
+                            data-elementdelay="0.05" >Restro
                         </div>
                         <div class="tp-caption third_text" 
                             data-x="center" 
@@ -342,7 +342,7 @@
         </div>
         <div class="popular_filter">
             <ul id="cat_id">
-                <li class="active" data-filter="*"><a href="">All</a></li>
+                <li class="active" data-filter="*" value=""><a href="">All</a></li>
                 <?php
                     $categories = $this->Category->get_all(5)->result();
                     foreach ($categories as $cat) {
@@ -521,6 +521,12 @@
         // var catId = $('#catId').val();
 
         var catId = $(this).attr('value');
+        
+        if(catId == "")
+        {
+            catId = "000";
+        }
+
 
         $.ajax({
           url: '<?php echo site_url() . '/get_all_products/';?>' + catId,
@@ -547,7 +553,6 @@
             });
 
             var data_count = Object.keys(data).length;
-
             document.getElementById('filtercatid').style.height = data_count * 120 + "px";
 
             // $('#name').val($('#name').val() + " ").blur();
