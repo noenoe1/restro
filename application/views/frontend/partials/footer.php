@@ -22,5 +22,7 @@
         <script src="<?php echo base_url('assets/frontend/vendors/js-calender/zabuto_calendar.min.js'); ?>"></script>
 
         <script src="<?php echo base_url('assets/frontend/js/theme.js'); ?>"></script>
+        
+
     </body>
 </html>

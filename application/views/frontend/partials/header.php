@@ -27,7 +27,8 @@
         
         <link href="<?php echo base_url('assets/frontend/css/style.css'); ?>" rel="stylesheet">
         <link href="<?php echo base_url('assets/frontend/css/responsive.css'); ?>" rel="stylesheet">
-
+        <!-- gallery slider -->
+        <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     </head>
 <body>
     <header class="main_menu_area">

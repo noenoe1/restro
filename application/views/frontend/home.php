@@ -366,7 +366,7 @@
                             <img src="<?php echo $this->ps_image->upload_url . $images[0]->img_path; ?>" alt="" style="width:150px;height: 160px;">
                         </div>
                         <div class="media-body">
-                            <a href="#"><h3><?php echo $prd->name; ?></h3></a>
+                            <a href="<?php echo site_url('food_detail/'.$prd->id); ?>"><h3><?php echo $prd->name; ?></h3></a>
                             <h4>$<?php echo $prd->original_price; ?></h4>
                             <p>
                                 <a href="<?php echo site_url('productdetail'); ?>">

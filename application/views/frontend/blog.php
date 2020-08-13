@@ -57,7 +57,7 @@
                                 <div class="pull-left">
                                     <a class="event_btn" href="<?php echo site_url('blogdetail/').$blog->id; ?>">READ MORE</a>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </article>
