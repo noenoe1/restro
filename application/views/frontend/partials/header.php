@@ -58,10 +58,11 @@
                         <?php if ( !isset( $user_info )): ?>
                         <li><a href="<?php echo site_url().'/userlogin'; ?>">Login</a></li>
                         <?php else: ?>
+                        <li><a href="<?php echo site_url().'/userprofile'; ?>"><i class="fa fa-user"> My Profile</i></a></li>
                         <li><a href="<?php echo site_url().'/userlogout'; ?>">Logout</a></li>
                         <?php endif; ?>
                         <li><a href="<?php echo site_url('contactus'); ?>">Contact US</a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+                        <li><a href="<?php echo site_url('basket'); ?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

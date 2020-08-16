@@ -3,7 +3,7 @@
     <div class="container">
         <div class="banner_content">
             <h4>Blog Details</h4>
-            <a href="#">Home</a>
+            <a href="<?php echo site_url('home'); ?>">Home</a>
             <a href="<?php echo site_url('blog'); ?>">Blog</a>
             <a class="active" href="#">Details</a>
         </div>

@@ -380,6 +380,13 @@
                                 </a>
                             </p>
                             <a class="read_mor_btn" href="#">Add To Cart</a>
+                            <?php 
+                                session_start();
+                                $session_id = session_id();
+                            ?>
+                              <input type="hidden" name="session_id" id="session_id" value="<?php echo $session_id; ?>">
+                              <input type="hidden" name="product_id" id="product_id" value="<?php echo $prd->id; ?>">
+                              <input type="hidden" name="original_price" id="original_price" value="<?php echo $prd->original_price; ?>">
                             <?php
                             //Rating Calculation Here 
                             
@@ -558,6 +565,33 @@
             // $('#name').val($('#name').val() + " ").blur();
             $('#products').trigger('change');
           }
+        });
+    });
+    // add to cart button listener
+    $('.read_mor_btn').on('click', function(){
+      var obj = {};
+      obj.product_id = $('#product_id').val();
+      obj.qty=1;
+      obj.session_id=$('#session_id').val();
+      var result = parseInt($(".bage").text())+parseInt($('#cart-quantity').val());
+      // alert(obj.product_id);
+      $(".bage").text(result);
+
+        $.ajax({
+            type: 'POST',
+            url: '<?php echo site_url() . '/guestajax/add_cart_products';?>',
+            data: obj,
+            dataType:'json',
+            success:function(resp){
+                // alert(resp.data);
+                if ( resp.status == 'success' ) {
+                    $('.alert-success').show();
+                    $( '.alert-success' ).html( "<strong>Success!</strong> Add To Cart." );
+
+                } else {
+                    console.log( resp );
+                }
+            }
         });
     });
 </script>

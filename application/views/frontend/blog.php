@@ -3,9 +3,8 @@
     <div class="container">
         <div class="banner_content">
             <h4>Blog List</h4>
-            <a href="#">Home</a>
-            <a href="<?php echo site_url('blog'); ?>">Blog</a>
-            <a class="active" href="#">List</a>
+            <a href="<?php echo site_url('home'); ?>">Home</a>
+            <a class="active" href="#">Blog List</a>
         </div>
     </div>
 </section>

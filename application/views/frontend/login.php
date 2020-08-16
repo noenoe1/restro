@@ -3,8 +3,8 @@
     <div class="container">
         <div class="banner_content">
             <h4>LOGIN Form</h4>
-            <a href="#">Home</a>
-            <a class="active" href="table.html">Login Form</a>
+            <a href="<?php echo site_url('home'); ?>">Home</a>
+            <a class="active" href="#">Login Form</a>
         </div>
     </div>
 </section>
