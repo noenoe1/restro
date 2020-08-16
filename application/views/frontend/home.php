@@ -573,7 +573,7 @@
       obj.product_id = $('#product_id').val();
       obj.qty=1;
       obj.session_id=$('#session_id').val();
-      var result = parseInt($(".bage").text())+parseInt($('#cart-quantity').val());
+      var result = parseInt($(".bage").text())+1;
       // alert(obj.product_id);
       $(".bage").text(result);
 

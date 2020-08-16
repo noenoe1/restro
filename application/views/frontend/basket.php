@@ -149,7 +149,7 @@
 	$('#shipping_area input[name="shipping_area"]').on('click', function(){
 		var subtotal = $('#subtotal').val();
 		var shipping_price = $(this).attr('value');
-		var total = subtotal + shipping_price;
+		var total = parseInt(subtotal) + parseInt(shipping_price);
 		$("#total_price").text("$"+total);
 	});
 </script>

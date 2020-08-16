@@ -62,7 +62,21 @@
                         <li><a href="<?php echo site_url().'/userlogout'; ?>">Logout</a></li>
                         <?php endif; ?>
                         <li><a href="<?php echo site_url('contactus'); ?>">Contact US</a></li>
-                        <li><a href="<?php echo site_url('basket'); ?>"><img src="<?php echo base_url('uploads/img/basket.png'); ?>" style="width: 35px;"></a></li>
+                        <li>
+                            <a href="<?php echo site_url('basket'); ?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a>
+                            <div class="bage">
+                                <?php
+                                    $conds['session_id'] = session_id();
+                                    $carts = $this->Productcart->get_all_by($conds);
+                                    $result = 0;
+                                    foreach ($carts->result() as $cart) {
+                                        $result +=$cart->qty;
+                                    }
+                                    echo $result;
+                                ?>
+                                
+                            </div>
+                        </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
