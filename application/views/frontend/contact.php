@@ -3,8 +3,8 @@
     <div class="container">
         <div class="banner_content">
             <h4>Contact Us</h4>
-            <a href="#">Home</a>
-            <a class="active" href="blog-gallery.html">Contat Us</a>
+            <a href="<?php echo site_url('home'); ?>">Home</a>
+            <a class="active" href="#">Contat Us</a>
         </div>
     </div>
 </section>

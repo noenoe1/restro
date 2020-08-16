@@ -416,4 +416,105 @@ class Home extends FE_Controller
 		$this->load_template('food_detail');
 	}
 
+	/**
+	 * Profile Page
+	 */
+	function userprofile()
+	{
+		// profile 
+		$this->load_template( 'profile' );
+	}
+
+	/**
+	 * Basket Page
+	 */
+	function basket()
+	{
+		$conds['session_id'] = session_id();
+		$this->data['cartlists'] = $this->Productcart->get_all_by($conds);
+		// basket 
+		$this->load_template( 'basket' );
+	}
+
+	function checkout()
+	{
+		$user_data = array(
+			"user_name" => $this->get_data( 'user_name' ),
+			"user_email" => $this->get_data( 'user_email' ),
+			"user_phone" => $this->get_data( 'user_phone' ),
+			"user_address" => $this->get_data( 'user_address' ),
+		);
+
+		if ( ! $this->User->save( $user_data )) {
+		// if there is an error in inserting user data,	
+
+			$this->set_flash_msg( 'error', get_msg( 'err_model' ));
+		}
+
+		$user_id = $user_data['user_id'] ;
+		
+		$trans_header_data = array(
+			"shop_id" => $this->get_data( 'shop_id' ),
+			"sub_total_amount" => $this->get_data( 'subtotal' ),
+			"total_item_amount" => $this->get_data( 'subtotal' ),
+			"total_item_count" => $this->get_data( 'total_count' ),
+			"added_user_id" => $user_id,
+			"contact_name" => $this->get_data( 'user_name' ),
+			"contact_phone" => $this->get_data( 'user_phone' ),
+			"contact_email" => $this->get_data( 'contact_email' ),
+			"contact_address" => $this->get_data( 'user_address' ),
+			"trans_status_id" => 1,
+			"shipping_amount" => $this->get_data( 'shipping_area' ),
+		);
+		if ( ! $this->Transactionheader->save( $trans_header_data )) {
+		// if there is an error in inserting user data,	
+
+			$this->set_flash_msg( 'error', get_msg( 'err_model' ));
+		}
+
+		$trans_header_id = $trans_header_data['id'];
+		$shops = $this->Shop->get_all()->result(); 
+		$shop_id = $shops[0]->id;
+		$conds['session_id'] = session_id();
+		$carts = $this->Productcart->get_all_by($conds);
+		
+		foreach ($carts->result() as $cart) {
+			$product_id = $cart->product_id;
+			$product_name = $this->Product->get_one($product_id)->name;
+			$product_qty = $cart->qty;
+			$product_price = $this->Product->get_one($product_id)->original_price;
+		    $trans_details = array(
+				"transactions_header_id" => $trans_header_id,
+				"shop_id" => $shop_id,
+				"product_id" => $product_id,
+				"product_name" => $product_name,
+				"qty" => $product_qty,
+				"price" => $product_price,
+				"added_user_id" => $user_id
+			);
+			$this->Transactiondetail->save( $trans_details );
+		}
+
+		$this->Productcart->delete_by( $conds );
+
+		//Sending Email to shop
+		$to_who = "shop";
+		$subject = get_msg('order_receive_subject');
+		if ( !send_checkout_order_emails( $trans_header_id, $to_who, $subject )) {
+
+			$this->error_response( get_msg( 'user_register_success_but_email_not_send' ));
+		
+		} 
+
+		$to_who = "user";
+		$subject = get_msg('order_receive_subject');
+		if ( !send_checkout_order_emails( $trans_header_id, $to_who, $subject )) {
+
+			$this->error_response( get_msg( 'user_register_success_but_email_not_send' ));
+		
+		} 
+		$this->set_flash_msg( 'success', get_msg( 'success_prd_add' ));
+		redirect( site_url('addcart'));
+
+	}
 }
