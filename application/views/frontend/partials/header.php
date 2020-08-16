@@ -62,7 +62,7 @@
                         <li><a href="<?php echo site_url().'/userlogout'; ?>">Logout</a></li>
                         <?php endif; ?>
                         <li><a href="<?php echo site_url('contactus'); ?>">Contact US</a></li>
-                        <li><a href="<?php echo site_url('basket'); ?>"><i class="fa fa-shopping-cart" aria-hidden="true"></i></a></li>
+                        <li><a href="<?php echo site_url('basket'); ?>"><img src="<?php echo base_url('uploads/img/basket.png'); ?>" style="width: 35px;"></a></li>
                     </ul>
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->

@@ -434,23 +434,6 @@ body, p, h1, h2, h3, h4, h5, h6 {
   position: relative;
 }
 
-.main_menu_area .navbar.navbar-default .navbar-collapse .nav.navbar-nav li:last-child a:before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 61%;
-  -webkit-transform: translateX(-50%) translateY(-50%);
-  -ms-transform: translateX(-50%) translateY(-50%);
-  transform: translateX(-50%) translateY(-50%);
-  height: 44px;
-  width: 44px;
-  background: #b10400;
-  border-radius: 50%;
-  z-index: -1;
-  transition: all 400ms linear 0s;
-  border: 1px solid #b10400;
-}
-
 .main_menu_area .navbar.navbar-default .navbar-collapse .nav.navbar-nav li:hover a, .main_menu_area .navbar.navbar-default .navbar-collapse .nav.navbar-nav li.active a {
   color: #b10400;
 }
