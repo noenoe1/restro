@@ -3770,6 +3770,38 @@ body, p, h1, h2, h3, h4, h5, h6 {
   transform: scale(1);
 }
 
+.bage{
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  background: #b10400;
+  color: #fff;
+  line-height: 25px;
+  text-align: center;
+  border-radius: 30px;
+  font-size: 12px;
+  top: 0px;
+  right: 5px;
+}
+
+.btn-increment-decrement {
+    display: inline-block;
+    padding: 5px 0px;
+    background: #e2e2e2;
+    width: 30px;
+    text-align: center;
+    cursor:pointer;
+}
+
+.input-quantity {
+  border: 0px;
+    width: 30px;
+    display: inline-block;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
 .copy_right_area {
   background: #121212;
 }
@@ -3961,13 +3993,13 @@ body, p, h1, h2, h3, h4, h5, h6 {
 .card_area .product_count_area {
   display: flex;
   align-items: center;
-
+}
 
 /* line 168, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_single_product.scss */
 .card_area .product_count_area p {
   margin-top: 0 !important;
   color: #828bb2;
-
+}
 
 /* line 173, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_single_product.scss */
 .card_area .product_count {
@@ -3985,49 +4017,49 @@ body, p, h1, h2, h3, h4, h5, h6 {
 .card_area .product_count .product_count_item {
   width: 50px;
   height: 50px;
-
+}
 @media (max-width: 991px) {
   /* line 179, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_single_product.scss */
   .card_area .product_count .product_count_item {
     width: 45px;
   }
-
+}
 
 /* line 189, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_single_product.scss */
 .card_area .product_count input {
   background-color: #828bb2;
   color: #fff;
-
+}
  
  /* line 765, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
  .cart_area .product_count {
    display: inline-block;
    position: relative;
-
+}
  
  /* line 771, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
  .cart_area .product_count input {
    width: 76px;
    border: 1px solid #eeeeee;
-
+}
  
  /* line 778, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
  .cart_area .product_count .input-number-increment {
    position: absolute;
    right: 0;
-
+}
  
  /* line 786, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
  .cart_area .product_count .input-number-increment:after {
    position: absolute;
    content: "";
-
+}
  
  /* line 798, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
  .cart_area .product_count .input-number-decrement {
    position: absolute;
    right: 0;
-
+}
  
  /* line 1153, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
  .cart_inner .table tbody tr td .product_count {
@@ -4038,7 +4070,7 @@ body, p, h1, h2, h3, h4, h5, h6 {
  .cart_inner .table tbody tr td .product_count input {
    width: 100px;
    padding-left: 30px;
-
+}
  
  /* line 1164, ../../SAIFUL/Running_project/250 eCommerce_HTML/250 eCommerce_HTML/250 eCommerce_HTML/assets/scss/_product.scss */
  .cart_inner .table tbody tr td .product_count .increase {
