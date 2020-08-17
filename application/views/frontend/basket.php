@@ -40,7 +40,7 @@
 	                      <div class="d-flex">
 	                        <img src="<?php echo $this->ps_image->upload_thumbnail_url . $images[0]->img_path; ?>" alt="" />
 	                      </div>
-	                      <div class="media-body">
+	                      <div class="media-body" style="width: 600px;">
 	                        <p><?php echo $this->Product->get_one($cart->product_id)->name; ?></p>
 	                        <input type="hidden" name="shop_id" id="shop_id" value="<?php echo $this->Product->get_one($cart->product_id)->shop_id; ?>">
 	                      </div>
