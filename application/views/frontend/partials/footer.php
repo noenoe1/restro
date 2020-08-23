@@ -22,7 +22,23 @@
         <script src="<?php echo base_url('assets/frontend/vendors/js-calender/zabuto_calendar.min.js'); ?>"></script>
 
         <script src="<?php echo base_url('assets/frontend/js/theme.js'); ?>"></script>
-        
-
+        <!-- slick -->
+        <script src="<?php echo base_url('assets/frontend/slick/slick.js'); ?>" type="text/javascript" charset="utf-8"></script>
+        <script type="text/javascript">
+            $("#orderslider").slick({
+                dots: true,
+                infinite: true,
+                slidesToShow: 4,
+                slidesToScroll: 4
+            });
+        </script>
+        <script type="text/javascript">
+            $("#resvslider").slick({
+                dots: true,
+                infinite: true,
+                slidesToShow: 4,
+                slidesToScroll: 4
+            });
+        </script>
     </body>
 </html>

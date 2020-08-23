@@ -29,6 +29,47 @@
         <link href="<?php echo base_url('assets/frontend/css/responsive.css'); ?>" rel="stylesheet">
         <!-- gallery slider -->
         <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+        <!-- slick -->
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/slick/slick.css'); ?>">
+        <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/frontend/slick/slick-theme.css'); ?>">
+        <style type="text/css">
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .slider {
+        width: 50%;
+        margin: 100px auto;
+    }
+
+    .slick-slide {
+      margin: 0px 20px;
+    }
+
+    .slick-prev:before,
+    .slick-next:before {
+      color: black;
+    }
+
+
+    .slick-slide {
+      transition: all ease-in-out .3s;
+      opacity: .2;
+    }
+    
+    .slick-active {
+      opacity: .5;
+    }
+
+    .slick-current {
+      opacity: 1;
+    }
+  </style>
     </head>
 <body>
     <header class="main_menu_area">
