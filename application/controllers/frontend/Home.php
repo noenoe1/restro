@@ -383,16 +383,21 @@ class Home extends FE_Controller
 	/**
 	 * Blog Page
 	 */
-	function blog($page=1)
+	function blog()
 	{
-		$total = $this->Feed->count_all_by( array( 'no_publish_filter' => 1 ) );
-	 	$pag = $this->config->item( 'blog_display_limit' );
-	 	$noofpage = ceil($total/$pag);
-	 	$conds['status'] = 1;
-	 	$offset = (($page-1)*$pag);
-	 	$limit = $pag;
+		if (isset($_GET['pageno'])) {
+            $pageno = $_GET['pageno'];
+        } else {
+            $pageno = 1;
+        }
+        $limit = $this->config->item( 'blog_display_limit' );
+        $offset = ($pageno-1) * $limit;
+		$total_rows = $this->Feed->count_all_by( array( 'no_publish_filter' => 1 ) );
+	 	$total_pages = ceil($total_rows / $limit);
 		$blogs = $this->Feed->get_all_by( array( 'no_publish_filter' => 1 ), $limit, $offset );
 		$this->data['blogs'] = $blogs;
+		$this->data['pageno'] = $pageno;
+		$this->data['total_pages'] = $total_pages;
 		$this->load_template('blog');
 	}
 

@@ -852,7 +852,7 @@ body, p, h1, h2, h3, h4, h5, h6 {
   -ms-transform: translateX(-50%);
   transform: translateX(-50%);
   text-align: center;
-  top: -64px;
+  top: -30px;
 }
 
 .service_item h3 {

@@ -65,7 +65,7 @@
 <section class="service_area">
     <div class="container">
     	<h3>Order History</h3>
-    	<br><br>
+    	
         <div class="row" id="orderslider">
  
 			<?php
@@ -86,14 +86,9 @@
 			<?php } ?>
 				      
 		</div>
-    </div>
-</section>
-<!--================End Order history =================-->
-<!--================ Order history =================-->
-<section class="service_area">
-    <div class="container">
-    	<h3>Reservation History</h3>
-    	<br><br>
+
+		<h3>Reservation History</h3>
+    	
         <div class="row" id="resvslider">
  
 			<?php
@@ -119,3 +114,4 @@
     </div>
 </section>
 <!--================End Order history =================-->
+<!--================ Order history =================-->
