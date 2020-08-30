@@ -64,13 +64,14 @@
                 </div>
                 <nav aria-label="Page navigation" class="blog_pagination">
                     <ul class="pagination">
-                        <li class="active"><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li>
-                            <a href="#" aria-label="Next">
-                                <span aria-hidden="true">&raquo;</span>
-                            </a>
+                        <li><a href="?pageno=1">First</a></li>
+                        <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?>">
+                            <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>">Prev</a>
                         </li>
+                        <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?>">
+                            <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?>">Next</a>
+                        </li>
+                        <li><a href="?pageno=<?php echo $total_pages; ?>">Last</a></li>
                     </ul>
                 </nav>
             </div>
