@@ -33,4 +33,16 @@ class Guestajax extends Ajax_Controller {
 		$this->success_response( get_msg( 'success_save_basket' ));
 	}
 
+	function updateCartQuantity()
+	{
+		$data['qty'] = $_POST["new_quantity"];
+		$id = $_POST["cart_id"];
+		if ( !$this->Productcart->save($data, $id)) {
+		// if an error in saving contact,
+
+			$this->error_response( get_msg( 'err_model' ));
+		}
+		$this->success_response( get_msg('success_update_basket') );
+	}
+
 }
