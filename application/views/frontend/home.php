@@ -379,14 +379,15 @@
                                 ?>
                                 </a>
                             </p>
-                            <a class="read_mor_btn" href="#">Add To Cart</a>
+                            <a class="read_mor_btn" href="#" value="<?php echo $prd->id; ?>">
+                                Add To Cart
                             <?php 
                                 session_start();
                                 $session_id = session_id();
                             ?>
                               <input type="hidden" name="session_id" id="session_id" value="<?php echo $session_id; ?>">
-                              <input type="hidden" name="product_id" id="product_id" value="<?php echo $prd->id; ?>">
                               <input type="hidden" name="original_price" id="original_price" value="<?php echo $prd->original_price; ?>">
+                            </a>
                             <?php
                             //Rating Calculation Here 
                             
@@ -570,11 +571,12 @@
     // add to cart button listener
     $('.read_mor_btn').on('click', function(){
       var obj = {};
-      obj.product_id = $('#product_id').val();
+      alert($(this).attr('value'));
+      obj.product_id = $(this).attr('value');
       obj.qty=1;
       obj.session_id=$('#session_id').val();
       var result = parseInt($(".bage").text())+1;
-      // alert(obj.product_id);
+      
       $(".bage").text(result);
 
         $.ajax({

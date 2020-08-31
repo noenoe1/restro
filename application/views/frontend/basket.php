@@ -36,8 +36,8 @@
 	                      	$images = $this->Image->get_all_by( $conds )->result();
 	                    ?>
 	                  	<td>
-	                    <div class="media">
-	                      <div class="d-flex">
+	                    <div class="media" style="width:100px;">
+	                      <div class="d-flex" >
 	                        <img src="<?php echo $this->ps_image->upload_thumbnail_url . $images[0]->img_path; ?>" alt="" />
 	                      </div>
 	                      <div class="media-body" style="width: 600px;">
@@ -50,11 +50,11 @@
 	                    <h5><?php echo $this->Product->get_one($cart->product_id)->original_price; ?></h5>
 	                  </td>
 	                  <td>
-	                    <div class="product_count">
-	                      <span class="input-number-decrement" onClick="decrement_quantity('<?php echo $cart->id; ?>', '<?php echo $this->Product->get_one($cart->product_id)->original_price; ?>')"> - </span>
-	                      <input class="input-number" type="text" id="input-quantity-<?php echo $cart->id ?>" value="<?php echo $cart->qty; ?>" min="0" max="10">
-	                      <span class="input-number-increment" onClick="increment_quantity('<?php echo $cart->id; ?>', '<?php echo $this->Product->get_one($cart->product_id)->original_price; ?>')"> + </span>
-	                    </div>
+	                  	<div class="product-quantity">
+					      	<input style="width: 40px;" type="number" value="<?php echo $cart->qty; ?>" min="1">
+					      	<input type="hidden" name="price" id="price" value="<?php echo $this->Product->get_one($cart->product_id)->original_price; ?>">
+					      	<input type="hidden" name="cart_id" id="cart_id" value="<?php echo $cart->id; ?>">
+					    </div>
 	                  </td>
 	                  <td>
 	                    <h5 id="cart-price-<?php echo $cart->id; ?>">
@@ -146,10 +146,44 @@
 <!--================End Cart Area =================-->
 <script src="<?php echo base_url( 'assets/jquery/jquery.min.js' ); ?>"></script>
 <script>
+
 	$('#shipping_area input[name="shipping_area"]').on('click', function(){
+		alert("fas");
 		var subtotal = $('#subtotal').val();
 		var shipping_price = $(this).attr('value');
 		var total = parseInt(subtotal) + parseInt(shipping_price);
 		$("#total_price").text("$"+total);
 	});
+
+	$('.product-quantity input').change( function() {
+		var newqty = $(this).val();
+		var price = $('#price').val();
+		var cart_id = $('#cart_id').val();
+		var newprice = newqty * price;
+	  	save_to_db(cart_id, newqty , newprice);
+	});
+
+	/* Update quantity */
+	function save_to_db(cart_id, newqty , newprice)
+	{
+	  var priceElement = $("#cart-price-"+cart_id);
+	    $.ajax({
+	    	type: 'POST',
+		    url : '<?php echo site_url() . '/guestajax/updateCartQuantity/';?>',
+		    data : "cart_id="+cart_id+"&new_quantity="+newqty,
+		    success : function(response) {
+		      	$('.product-quantity input').val(newqty);
+		        $(priceElement).text("$"+newprice);
+		        var totalItemPrice = 0;
+		        $("h5[id*='cart-price-']").each(function() {
+		            var cart_price = $(this).text().replace("$","");
+		            totalItemPrice = parseInt(totalItemPrice) + parseInt(cart_price);
+		        });
+		        
+		        $("#sub_total").text("$"+totalItemPrice);
+		        $("#total_price").text("$"+totalItemPrice);
+	        }
+  		});
+	}
+
 </script>
